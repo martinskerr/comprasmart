@@ -19,11 +19,22 @@ export default function Home() {
     localStorage.setItem('shoppingList', JSON.stringify(updatedList));
   };
 
+  // Función para eliminar un producto de la lista y actualizar el localStorage
+  const handleDeleteProduct = (index) => {
+    const updatedList = shoppingList.filter((_, i) => i !== index);
+    setShoppingList(updatedList);
+    localStorage.setItem('shoppingList', JSON.stringify(updatedList));
+  };
+
+
+
   return (
     <main>
+      
       <Header />
       <Form onSubmit={handleAddProduct} />
-      <CardList shoppingList={shoppingList} />
+      <CardList shoppingList={shoppingList} handleDeleteProduct={handleDeleteProduct} />
+
     </main>
   );
 }

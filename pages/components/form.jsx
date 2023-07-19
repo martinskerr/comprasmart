@@ -17,22 +17,26 @@ const Form = ({ onSubmit }) => {
       important,
     };
 
-    onSubmit(shoppingItem);
+    // datos en el localStorage
+    const storedData = JSON.parse(localStorage.getItem('shoppingList')) || [];
+    storedData.push(shoppingItem);
+    localStorage.setItem('shoppingList', JSON.stringify(storedData));
 
-    // Limpiar el formulario después de enviar
+    
     setProductName('');
     setQuantity('');
     setCategory('');
     setNotes('');
     setImportant(false);
+
+    onSubmit(shoppingItem);
   };
 
-
-
-
-  
   return (
-    <form className="max-w-6xl mx-auto p-4 border rounded shadow-lg mt-12 font-semibold " onSubmit={handleSubmit}>
+    <form
+      className="max-w-6xl mx-auto p-4 border rounded shadow-lg mt-12 font-semibold"
+      onSubmit={handleSubmit}
+    >
       <div className="mb-4">
         <label className="block mb-2">Nombre del producto:</label>
         <input
@@ -93,3 +97,9 @@ const Form = ({ onSubmit }) => {
 };
 
 export default Form;
+
+
+
+
+
+
